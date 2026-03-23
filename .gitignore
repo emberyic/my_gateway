@@ -1,0 +1,17 @@
+#编译产物
+/gateway
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+#IDE配置
+.vscode/
+.idea/
+*.swp
+
+#临时文件
+*.log
+*.tmp
+.DS_Store

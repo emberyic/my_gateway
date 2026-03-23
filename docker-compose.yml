@@ -1,0 +1,37 @@
+services:
+  gateway:
+    build: .
+    container_name: my-gateway
+    ports:
+      - "8080:8080"  # 网关对外端口
+    environment:
+      - GATEWAY_LOG_LEVEL=info
+      - BACKEND_URL=http://backend-go:8081 
+    restart: unless-stopped
+    networks:
+      - gateway-network
+
+  backend-go:
+    image: mendhak/http-https-echo:latest
+    container_name: backend-go
+    environment:
+      - HTTP_PORT=8081
+      - BACKEND_URL=http://backend-go:8081
+    ports:
+      - "8081:8081"
+    networks:
+      - gateway-network
+
+  # Redis (用于分布式限流扩展)
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+    - "6380:6379"
+    command: redis-server --appendonly yes
+    networks:
+      - gateway-network
+
+networks:
+  gateway-network:
+    driver: bridge
