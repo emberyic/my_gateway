@@ -35,6 +35,7 @@ bash：
 wrk -t4 -c100 -d30s http://localhost:8080/api/test
 使用循环脚本快速发送 20 个请求（间隔 0.05 秒），观察状态码变化：
 for i in {1..20}; do curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080/api/test; sleep 0.05; done
+docker stats
 
 ##   限流功能验证
 Running 30s test @ http://localhost:8080/api/test
@@ -59,3 +60,10 @@ Transfer/sec:      4.21MB
 
 **初始时桶内有 3 个令牌，前 3 个请求立即通过（200）。**
 **由于令牌生成速度为 5 个/秒，而请求速率远高于此，因此后续出现 200 和 429 交替的情况，这正是令牌桶算法允许突发但长期平均速率受控的表现。**
+
+**使用 `docker stats` 监控网关容器在 1.8 万 QPS 压测下的资源消耗：**
+
+| 指标 | 数值 |
+| CPU | 约 120%（占 1.2 个核心） |
+| 内存 | 约 10 MiB |
+| PIDs（线程/goroutine）| 15 |
