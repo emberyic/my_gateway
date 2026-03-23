@@ -63,7 +63,6 @@ Transfer/sec:      4.21MB
 
 **使用 `docker stats` 监控网关容器在 1.8 万 QPS 压测下的资源消耗：**
 
-| 指标 | 数值 |
-| CPU | 约 120%（占 1.2 个核心） |
-| 内存 | 约 10 MiB |
-| PIDs（线程/goroutine）| 15 |
+| CPU  约 120%（占 1.2 个核心） |
+| 内存  约 10 MiB |
+| PIDs（线程/goroutine） 15 |
