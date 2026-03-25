@@ -2,11 +2,11 @@
 一个用于学习的高性能、可扩展的Go语言网关实现，具备反向代理、限流、连接池等核心功能。
 
 ##   功能特性
-**反向代理**: 支持基于路径的路由转发
-**并发引擎**: 自定义连接池与内存池，高效复用资源
-**限流保护**: 基于令牌桶算法的IP级限流
-**容器化**: 完整的Docker支持，一键部署
-**可观测**: 内置请求日志与性能指标
+**反向代理**: 支持基于路径的路由转发  
+**并发引擎**: 自定义连接池与内存池，高效复用资源  
+**限流保护**: 基于令牌桶算法的IP级限流  
+**容器化**: 完整的Docker支持，一键部署  
+**可观测**: 内置请求日志与性能指标  
 
 ##   项目结构
 my_gateway/  
@@ -30,23 +30,23 @@ my_gateway/
 ├── test_backend.go  
 
 ##  性能压测
-使用 [wrk](https://github.com/wg/wrk) 进行压力测试（4 线程，100 连接，持续 30 秒）：
-bash：
-wrk -t4 -c100 -d30s http://localhost:8080/api/test
-使用循环脚本快速发送 20 个请求（间隔 0.05 秒），观察状态码变化：
-for i in {1..20}; do curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080/api/test; sleep 0.05; done
-docker stats
+使用 [wrk](https://github.com/wg/wrk) 进行压力测试（4 线程，100 连接，持续 30 秒）：  
+bash：  
+wrk -t4 -c100 -d30s http://localhost:8080/api/test  
+使用循环脚本快速发送 20 个请求（间隔 0.05 秒），观察状态码变化：  
+for i in {1..20}; do curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080/api/test; sleep 0.05; done  
+docker stats  
 
 ##   限流功能验证
-Running 30s test @ http://localhost:8080/api/test
-  4 threads and 100 connections
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     6.07ms    4.85ms  94.65ms   80.42%
-    Req/Sec     4.53k   688.74     6.62k    78.33%
-  541063 requests in 30.06s, 126.49MB read
-  Non-2xx or 3xx responses: 540910
-Requests/sec:  18002.28
-Transfer/sec:      4.21MB
+Running 30s test @ http://localhost:8080/api/test  
+  4 threads and 100 connections  
+  Thread Stats   Avg      Stdev     Max   +/- Stdev  
+    Latency     6.07ms    4.85ms  94.65ms   80.42%  
+    Req/Sec     4.53k   688.74     6.62k    78.33%  
+  541063 requests in 30.06s, 126.49MB read  
+  Non-2xx or 3xx responses: 540910  
+Requests/sec:  18002.28  
+Transfer/sec:      4.21MB  
 
 **QPS：约 18002 req/s**
 **平均延迟：6.07ms**
