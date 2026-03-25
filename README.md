@@ -9,11 +9,11 @@
 **可观测**: 内置请求日志与性能指标
 
 ##   项目结构
-my_gateway/
-├── cmd/gateway/
-│ └── main.go        程序入口
-├── configs/
-│ └── gateway.yml
+my_gateway/  
+├── cmd/gateway/  
+│ └── main.go        程序入口  
+├── configs/  
+│ └── gateway.yml  
 ├──pkg/config/
 │ └── config.go
 ├──pkg/gateway/
