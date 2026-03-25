@@ -14,20 +14,20 @@ my_gateway/
 │ └── main.go        程序入口  
 ├── configs/  
 │ └── gateway.yml  
-├──pkg/config/
-│ └── config.go
-├──pkg/gateway/
-│ └── engine.go      并发转发引擎（核心）
-│ └── gateway.go     网关主逻辑
-│ └── middleware.go  限流中间件
-├── scripts/
-│ └── benchmark.sh      压测脚本
-├── docker-compose.yml  多服务编排
-├── Dockerfile          容器构建
-├── go.mod
-├── go.sum
-├── README.md
-├── test_backend.go
+├──pkg/config/  
+│ └── config.go  
+├──pkg/gateway/  
+│ └── engine.go      并发转发引擎（核心）  
+│ └── gateway.go     网关主逻辑  
+│ └── middleware.go  限流中间件  
+├── scripts/  
+│ └── benchmark.sh      压测脚本  
+├── docker-compose.yml  多服务编排  
+├── Dockerfile          容器构建  
+├── go.mod  
+├── go.sum  
+├── README.md  
+├── test_backend.go  
 
 ##  性能压测
 使用 [wrk](https://github.com/wg/wrk) 进行压力测试（4 线程，100 连接，持续 30 秒）：
@@ -53,9 +53,9 @@ Transfer/sec:      4.21MB
 **中位数延迟：约 5ms（根据分布估算）**
 **所有请求均被限流器正确拦截（返回 429），证明限流机制在高并发下依然准确。**
 
-200    200     200    200    429    429
-200    429     429    200    429    429
-200    429     429    200    429    429
+200    200     200    200    429    429  
+200    429     429    200    429    429  
+200    429     429    200    429    429  
 200    429
 
 **初始时桶内有 3 个令牌，前 3 个请求立即通过（200）。**
@@ -63,6 +63,6 @@ Transfer/sec:      4.21MB
 
 **使用 `docker stats` 监控网关容器在 1.8 万 QPS 压测下的资源消耗：**
 
-| CPU  约 120%（占 1.2 个核心） |
-| 内存  约 10 MiB |
+| CPU  约 120%（占 1.2 个核心） |  
+| 内存  约 10 MiB |  
 | PIDs（线程/goroutine） 15 |
